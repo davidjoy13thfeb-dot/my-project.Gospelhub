@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gospel Hub - Create Account</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --navy:    #0f172a;
+    --navy-md: #1e293b;
+    --red:     #c0392b;
+    --red-hov: #a93226;
+    --slate:   #64748b;
+    --muted:   #94a3b8;
+    --border:  #e2e8f0;
+    --bg:      #faf9f7;
+    --white:   #ffffff;
+    --success: #16a34a;
+    --error:   #dc2626;
+    --font-display: 'Lora', Georgia, serif;
+    --font-body:    'DM Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(192,57,43,0.04) 0%, transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(15,23,42,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.3px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wordmark-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 40px 36px 36px;
+    position: relative;
+    z-index: 1;
+    box-shadow:
+      0 1px 3px rgba(15,23,42,0.06),
+      0 8px 32px rgba(15,23,42,0.10),
+      0 32px 64px rgba(15,23,42,0.06);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 36px; right: 36px;
+    height: 3px;
+    background: var(--red);
+    border-radius: 0 0 3px 3px;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+
+  .card-sub {
+    font-size: 14px;
+    color: var(--slate);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  .card-sub a {
+    color: var(--red);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .card-sub a:hover { color: var(--red-hov); }
+
+  .social-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .social-btn {
+    width: 100%;
+    height: 46px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+
+  .social-btn:hover {
+    border-color: #c7d2e0;
+    background: var(--bg);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.07);
+  }
+
+  .social-btn:active { transform: scale(0.99); }
+
+  .social-btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy-md);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  .field input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--navy);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .field input::placeholder { color: var(--muted); }
+
+  .field input:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(15,23,42,0.08);
+  }
+
+  .field input.invalid:not(:placeholder-shown) {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
+  }
+
+  .field input.valid {
+    border-color: var(--success);
+  }
+
+  .strength-bar {
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border);
+    margin-top: 6px;
+    overflow: hidden;
+  }
+
+  .strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.3s, background 0.3s;
+  }
+
+  .hint {
+    font-size: 11px;
+    min-height: 16px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .hint.error   { color: var(--error); }
+  .hint.success { color: var(--success); }
+
+  .terms-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 4px 0 20px;
+  }
+
+  .terms-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--red);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .terms-row label {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .terms-row a {
+    color: var(--red);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .submit-btn {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: not-allowed;
+    background: var(--border);
+    color: var(--muted);
+    transition: background 0.25s, color 0.25s, transform 0.15s, box-shadow 0.25s;
+    letter-spacing: 0.2px;
+  }
+
+  .submit-btn.active {
+    background: var(--red);
+    color: var(--white);
+    cursor: pointer;
+  }
+
+  .submit-btn.active:hover {
+    background: var(--red-hov);
+    box-shadow: 0 4px 16px rgba(192,57,43,0.3);
+  }
+
+  .submit-btn.active:active { transform: scale(0.99); }
+
+  .card-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .card-footer a { color: var(--slate); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .card { padding: 32px 20px 28px; }
+    .card::before { left: 20px; right: 20px; }
+    .name-row { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+
+<body>
+
+  <div class="wordmark">
+    <span class="wordmark-dot"></span>
+    <strong><b>Gospel Hub</b></strong>
+  
+  </div>
+
+  <div class="card">
+
+    <h1 class="card-title">Create your account</h1>
+
+    <!-- ✅ FIX: linked to correct filename, no spaces -->
+    <p class="card-sub">Already have an account? <a href="gospel-hub-signin.html">Sign in</a></p>
+
+    <div class="social-group">
+
+      <button type="button" class="social-btn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <button type="button" class="social-btn">
+        <svg viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Continue with Facebook
+      </button>
+
+      <button type="button" class="social-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/>
+        </svg>
+        Continue with Apple
+      </button>
+
+    </div>
+
+    <div class="divider">or sign up with email</div>
+
+    <form id="signupForm" novalidate>
+
+      <div class="name-row">
+        <div class="field">
+          <label for="firstName">First name</label>
+          <input id="firstName" type="text" placeholder="John" autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="lastName">Last name</label>
+          <input id="lastName" type="text" placeholder="Doe" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" placeholder="john@example.com" autocomplete="email">
+        <span class="hint" id="emailHint"></span>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Min. 8 characters" autocomplete="new-password">
+        <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+        <span class="hint" id="passwordHint"></span>
+      </div>
+
+      <div class="field">
+        <label for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" type="password" placeholder="Re-enter password" autocomplete="new-password">
+        <span class="hint" id="confirmHint"></span>
+      </div>
+
+      <div class="terms-row">
+        <input type="checkbox" id="terms">
+        <label for="terms">
+          I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn" disabled>
+        Create Account
+      </button>
+
+    </form>
+
+    <div class="card-footer">
+      Gospel Hub &copy; 2026 &nbsp;&middot;&nbsp; <a href="#">Help</a>
+    </div>
+
+  </div>
+
+<script>
+  const firstName    = document.getElementById('firstName');
+  const lastName     = document.getElementById('lastName');
+  const emailEl      = document.getElementById('email');
+  const passwordEl   = document.getElementById('password');
+  const confirmEl    = document.getElementById('confirmPassword');
+  const termsEl      = document.getElementById('terms');
+  const submitBtn    = document.getElementById('submitBtn');
+  const emailHint    = document.getElementById('emailHint');
+  const passwordHint = document.getElementById('passwordHint');
+  const confirmHint  = document.getElementById('confirmHint');
+  const strengthFill = document.getElementById('strengthFill');
+
+  function validEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  }
+
+  function passwordStrength(p) {
+    let score = 0;
+    if (p.length >= 8)           score++;
+    if (p.length >= 12)          score++;
+    if (/[A-Z]/.test(p))         score++;
+    if (/[0-9]/.test(p))         score++;
+    if (/[^A-Za-z0-9]/.test(p))  score++;
+    return score;
+  }
+
+  function updateStrengthBar(p) {
+    const score  = passwordStrength(p);
+    const pct    = p.length === 0 ? 0 : Math.max(20, score * 20);
+    const colors = ['', '#ef4444', '#f97316', '#eab308', '#22c55e', '#16a34a'];
+    const labels = ['', 'Too weak', 'Weak', 'Fair', 'Good', 'Strong'];
+    strengthFill.style.width      = pct + '%';
+    strengthFill.style.background = colors[score] || '#ef4444';
+    if (p.length > 0) {
+      passwordHint.textContent = labels[score] || 'Too weak';
+      passwordHint.className   = 'hint ' + (score >= 3 ? 'success' : 'error');
+    } else {
+      passwordHint.textContent = '';
+      passwordHint.className   = 'hint';
+    }
+  }
+
+  function validate() {
+    const fnOk = firstName.value.trim().length > 0;
+    const lnOk = lastName.value.trim().length > 0;
+    const emOk = validEmail(emailEl.value);
+    const pwOk = passwordStrength(passwordEl.value) >= 2 && passwordEl.value.length >= 8;
+    const cfOk = confirmEl.value === passwordEl.value && confirmEl.value.length > 0;
+    const tOk  = termsEl.checked;
+
+    if (emailEl.value.length > 0) {
+      if (emOk) {
+        emailHint.textContent = ''; emailHint.className = 'hint';
+        emailEl.classList.remove('invalid'); emailEl.classList.add('valid');
+      } else {
+        emailHint.textContent = 'Enter a valid email address';
+        emailHint.className   = 'hint error';
+        emailEl.classList.add('invalid'); emailEl.classList.remove('valid');
+      }
+    } else {
+      emailHint.textContent = ''; emailHint.className = 'hint';
+      emailEl.classList.remove('invalid', 'valid');
+    }
+
+    if (confirmEl.value.length > 0) {
+      if (cfOk) {
+        confirmHint.textContent = 'Passwords match';
+        confirmHint.className   = 'hint success';
+        confirmEl.classList.remove('invalid'); confirmEl.classList.add('valid');
+      } else {
+        confirmHint.textContent = 'Passwords do not match';
+        confirmHint.className   = 'hint error';
+        confirmEl.classList.add('invalid'); confirmEl.classList.remove('valid');
+      }
+    } else {
+      confirmHint.textContent = ''; confirmHint.className = 'hint';
+      confirmEl.classList.remove('invalid', 'valid');
+    }
+
+    const allOk = fnOk && lnOk && emOk && pwOk && cfOk && tOk;
+    submitBtn.disabled = !allOk;
+    submitBtn.classList.toggle('active', allOk);
+  }
+
+  [firstName, lastName, emailEl, confirmEl, termsEl].forEach(el => {
+    el.addEventListener('input', validate);
+    el.addEventListener('change', validate);
+  });
+
+  passwordEl.addEventListener('input', () => {
+    updateStrengthBar(passwordEl.value);
+    validate();
+  });
+
+  document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Account created successfully! Welcome to Gospel Hub.');
+  });
+</script>
+
+</body>
+</html>
